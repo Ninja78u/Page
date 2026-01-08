@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Loading</title>
+</head>
+<body>
+  <p>Loading...</p>
+
+  <script>
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        document.body.innerHTML =
+          "Lat: " + pos.coords.latitude +
+          "<br>Lon: " + pos.coords.longitude;
+      },
+      function() {
+        document.body.innerHTML = "Permission denied";
+      }
+    );
+  </script>
+</body>
+</html>
